@@ -25,11 +25,16 @@ var LockableStorage,
 
     STRETCH_CRITICAL_SECTION_UPPER_BOUND = 1.50;
 
-module.exports = LockableStorage = {};
+module.exports = LockableStorage = {
 
-LockableStorage.lock = function (key, callback, maxDuration) { lockImpl(key, callback, maxDuration, false);
+    lock: function (key, callback, maxDuration) {
+        lockImpl(key, callback, maxDuration, false);
+    },
 
-LockableStorage.trySyncLock = function (key, callback, maxDuration) { return lockImpl(key, callback, maxDuration, true);
+    trySyncLock: function (key, callback, maxDuration) {
+        return lockImpl(key, callback, maxDuration, true);
+    }
+};
 
 function someNumber() {
     return Math.random() * 1000000000 | 0;

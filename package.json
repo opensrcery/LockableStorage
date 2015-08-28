@@ -1,6 +1,6 @@
 {
   "name": "lockable-storage",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Concurrency and locking for HTML5 localStorage",
   "main": "LockableStorage.js",
   "scripts": {
