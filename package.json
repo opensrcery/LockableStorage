@@ -1,0 +1,28 @@
+{
+  "name": "lockable-storage",
+  "version": "0.0.1",
+  "description": "Concurrency and locking for HTML5 localStorage",
+  "main": "LockableStorage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tchakabam/LockableStorage.git"
+  },
+  "keywords": [
+    "local",
+    "storage",
+    "lock",
+    "mutex",
+    "multiple",
+    "tabs",
+    "concurrency"
+  ],
+  "author": "Benjamin Dumke-von der Ehe",
+  "license": "Copyright (c) 2012 (see LICENSE)",
+  "bugs": {
+    "url": "https://github.com/tchakabam/LockableStorage/issues"
+  },
+  "homepage": "https://github.com/tchakabam/LockableStorage"
+}
