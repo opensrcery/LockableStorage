@@ -1,6 +1,6 @@
-# Lockable Storage 
+# HTML5 Lockable Storage 
 
-Manage concurrency between tabs running independent processes.
+Manage concurrency between browser tabs running independent processes by (a)synchronizing the localStorage resource.
 
 This is the implementation by *Benjamin Dumke-von der Ehe* as posted in his 2012 article [JavaScript concurrency and locking the HTML5 localStorage](http://balpha.de/2012/03/javascript-concurrency-and-locking-the-html5-localstorage/).
 
