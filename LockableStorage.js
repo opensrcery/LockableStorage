@@ -16,14 +16,11 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 DEALINGS IN THE SOFTWARE.
 */
 
-/*
- LockableStorage.lock(key, lockAquiredCallback)
-*/
-
 var LockableStorage,
-    myId,
-
-    STRETCH_CRITICAL_SECTION_UPPER_BOUND = 1.50;
+    randomNumber = function () {
+        return Math.random() * 1000000000 | 0;
+    },
+    uniqueId = Date.now() + ":" + randomNumber();
 
 module.exports = LockableStorage = {
 
@@ -36,12 +33,6 @@ module.exports = LockableStorage = {
     }
 };
 
-function someNumber() {
-    return Math.random() * 1000000000 | 0;
-}
-
-myId = Date.now() + ":" + someNumber();
-
 function getter(lskey) {
     return function () {
         var value = localStorage[lskey];
@@ -49,7 +40,7 @@ function getter(lskey) {
             return null;
 
         var splitted = value.split(/\|/);
-        if (parseInt(splitted[1]) < now()) {
+        if (parseInt(splitted[1]) < Date.now()) {
             return null;
         }
         return splitted[0];
@@ -69,18 +60,18 @@ function _mutexTransaction(key, callback, synchronous) {
         }
     }
 
-    localStorage[xKey] = myId;
+    localStorage[xKey] = uniqueId;
     if (getY()) {
         if (!synchronous)
             setTimeout(function () { _mutexTransaction(key, callback); }, 0);
         return false;
     }
-    localStorage[yKey] = myId + "|" + (now() + 40);
+    localStorage[yKey] = uniqueId + "|" + (Date.now() + 40);
 
-    if (localStorage[xKey] !== myId) {
+    if (localStorage[xKey] !== uniqueId) {
         if (!synchronous) {
             setTimeout(function () {
-                if (getY() !== myId) {
+                if (getY() !== uniqueId) {
                     setTimeout(function () { _mutexTransaction(key, callback); }, 0);
                 } else {
                     criticalSection();
@@ -100,7 +91,7 @@ function lockImpl(key, callback, maxDuration, synchronous) {
 
     var mutexKey = key + "__MUTEX",
         getMutex = getter(mutexKey),
-        mutexValue = myId + ":" + someNumber() + "|" + (now() + maxDuration);
+        mutexValue = uniqueId + ":" + randomNumber() + "|" + (Date.now() + maxDuration);
 
     function restart () {
         setTimeout(function () { lockImpl(key, callback, maxDuration); }, 10);
