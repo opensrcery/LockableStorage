@@ -30,7 +30,11 @@ module.exports = LockableStorage = {
 
     trySyncLock: function (key, callback, maxDuration) {
         return lockImpl(key, callback, maxDuration, true);
-    }
+    },
+
+    uniqueId: function() {
+        return uniqueId;
+    },
 };
 
 function getter(lskey) {
