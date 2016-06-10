@@ -15,7 +15,10 @@ or
 ```
 
 ## Usage
+    import createLocker from 'lockable-storage';
+    import store from 'store';
 
-    LockableStorage.lock('key', function () {
+    const locker = createLockableStorage(store);
+    locker.lock('key', function () {
         // exclusive access to localStorage['key']
     });
