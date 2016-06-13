@@ -6,7 +6,7 @@ This is the implementation by *Benjamin Dumke-von der Ehe* as posted in his 2012
 
 ## About this fork
 
-- Corrects an oversight in the original implementation. Whereas the original implementation [hard-coded the "delay" parameter](https://github.com/elad/LockableStorage/blob/master/LockableStorage.js#L79), this implementation makes it user-configurable. For more on the delay parameter, refer to the original paper, on page 5: http://research.microsoft.com/en-us/um/people/lamport/pubs/fast-mutex.pdf. For the 
+- Corrects an oversight in the original implementation. Whereas the original implementation [hard-coded the "delay" parameter](https://github.com/elad/LockableStorage/blob/master/LockableStorage.js#L79), this fork's implementation makes it user-configurable, per the spec. For more on the delay parameter, refer to the original paper, on page 5: http://research.microsoft.com/en-us/um/people/lamport/pubs/fast-mutex.pdf. For the 
 - It abstracts away `localStorage`, and instead makes the user responsible for passing in a storage mechanism that is compatible with [store.js](https://github.com/marcuswestin/store.js/).
 
 ## Install
