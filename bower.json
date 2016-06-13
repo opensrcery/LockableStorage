@@ -1,8 +1,8 @@
 {
   "name": "LockableStorage",
   "main": "LockableStorage.js",
-  "version": "0.0.1",
-  "homepage": "http://balpha.de/2012/03/javascript-concurrency-and-locking-the-html5-localstorage/",
+  "version": "1.0.2",
+  "homepage": "https://github.com/opensrcken/LockableStorage.git",
   "authors": [
     "Benjamin Dumke-von der Ehe"
   ],
