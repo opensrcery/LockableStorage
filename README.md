@@ -4,6 +4,11 @@ Manage concurrency between browser tabs running independent processes by (a)sync
 
 This is the implementation by *Benjamin Dumke-von der Ehe* as posted in his 2012 article [JavaScript concurrency and locking the HTML5 localStorage](http://balpha.de/2012/03/javascript-concurrency-and-locking-the-html5-localstorage/).
 
+## About this fork
+
+- Corrects an oversight in the original implementation. Whereas the original implementation [hard-coded the "delay" parameter](https://github.com/elad/LockableStorage/blob/master/LockableStorage.js#L79), this implementation makes it user-configurable. For more on the delay parameter, refer to the original paper, on page 5: http://research.microsoft.com/en-us/um/people/lamport/pubs/fast-mutex.pdf. For the 
+- It abstracts away `localStorage`, and instead makes the user responsible for passing in a storage mechanism that is compatible with [store.js](https://github.com/marcuswestin/store.js/).
+
 ## Install
 
     bower install lockablestorage
