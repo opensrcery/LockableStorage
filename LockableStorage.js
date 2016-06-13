@@ -36,7 +36,7 @@ module.exports = function (store) {
         }
     }
 
-    function _mutexTransaction(key, callback, synchronous) {
+    function _mutexTransaction(key, callback, maxDuration, synchronous) {
         var xKey = key + "__MUTEX_x",
           yKey = key + "__MUTEX_y",
           getY = getter(yKey);
@@ -53,7 +53,7 @@ module.exports = function (store) {
         if (getY()) {
             if (!synchronous)
                 setTimeout(function () {
-                    _mutexTransaction(key, callback);
+                    _mutexTransaction(key, callback, maxDuration);
                 }, 0);
             return false;
         }
@@ -64,12 +64,12 @@ module.exports = function (store) {
                 setTimeout(function () {
                     if (getY() !== uniqueId) {
                         setTimeout(function () {
-                            _mutexTransaction(key, callback);
+                            _mutexTransaction(key, callback, maxDuration);
                         }, 0);
                     } else {
                         criticalSection();
                     }
-                }, 50)
+                }, maxDuration)
             }
             return false;
         } else {
@@ -107,7 +107,7 @@ module.exports = function (store) {
             store.set(mutexKey, mutexValue);
             if (!synchronous)
                 setTimeout(mutexAcquired, 0)
-        }, synchronous);
+        }, maxDuration, synchronous);
 
         if (synchronous && acquiredSynchronously) {
             mutexAcquired();
@@ -123,7 +123,7 @@ module.exports = function (store) {
                         throw key + " was locked by a different process while I held the lock"
 
                     store.remove(mutexKey);
-                });
+                }, maxDuration);
             }
         }
     }
